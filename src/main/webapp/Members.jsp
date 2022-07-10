@@ -21,7 +21,13 @@ Connection connection = null;
 Statement statement = null;
 ResultSet resultSet = null;
 %>
-<h2 align="center"><font><strong>logged in as a Super Admin</strong></font></h2>
+<html>
+<head>
+<!--  -->
+<link rel="stylesheet" href="Members.css">
+<head>
+<body>
+<h2 align="center"><font><strong>Logged in as a Super Admin</strong></font></h2>
 <table align="center" cellpadding="5" cellspacing="5" border="1">
 <tr>
 
@@ -43,15 +49,20 @@ resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
 	//int index = resultSet.getInt(1);
 %>
-<tr bgcolor="#DEB887">
-<%String username = resultSet.getString("username"); %>
-<td><%=username %></td>
-<td><%=resultSet.getString("status") %></td>
-<td><%=resultSet.getString("Approval") %></td>
-<td><form action="Included.jsp"><input type="hidden" name = "name" value=<%=username %>><input type="submit" value="Add Into Organization"></form></td>
-</tr>
+	<tr bgcolor="#DEB887">
+		<%
+		String username = resultSet.getString("username");
+		%>
+		<td><%=username%></td>
+		<td><%=resultSet.getString("status")%></td>
+		<td><%=resultSet.getString("Approval")%></td>
+		<td><form action="Included.jsp">
+				<input type="hidden" name="name" value=<%=username%>><input
+					type="submit" value="Add Into Organization">
+			</form></td>
+	</tr>
 
-<% 
+	<% 
 
 }
 
@@ -64,3 +75,5 @@ finally
 }
 %>
 </table>
+</body>
+</html>
