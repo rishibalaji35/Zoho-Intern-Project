@@ -12,6 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
@@ -56,14 +58,18 @@ public class LoginAdmin extends HttpServlet {
 		LogDoa doa = new LogDoa();
 //		insert ins = new insert();
 		if (doa.check(username,pass,orgname,manid,empid)) {
+			HttpSession session = request.getSession();
+			session.setAttribute("orgname", orgname);
+			
+			
 			response.sendRedirect("Members.jsp");
 		}
 //		 else if(ins.add(uname, pass,stat)){
 //			
 //			response.sendRedirect("Added.jsp");
 //		}
-//		else {
-//			response.sendRedirect("Error.jsp");
-//		}
+		else {
+			response.sendRedirect("login.jsp");
+		}
 	}
 }

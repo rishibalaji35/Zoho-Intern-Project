@@ -26,39 +26,22 @@ ResultSet resultSet = null;
 <!DOCTYPE html>
 <html>
 <head>
-<!--  --><link rel="stylesheet" href="included.css">
+<link rel="stylesheet" href="roleassigned.css">
 <meta charset="ISO-8859-1">
-<title>User Added</title>
+<title>Role Assigned</title>
 </head>
 <body>
-<center>
-<p>Selected User added Successfully!!</p>
-<p>Assign a Role to the selected User</p><br>
-</center>
+Role Assigned!!!!!
+
 <%
 try{ 
 connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 statement=connection.createStatement();
 String username = request.getParameter("name");
+String status = request.getParameter("role");
 
-String sql ="UPDATE member set Approval = 'Approved' where username = '"+username+"'" ;
+String sql ="update member set status='"+status+"' where username = '"+username+"'";
 %>
-<center>
-<form action = "assignrole.jsp" method = "post">
-<!-- <input type = "text" name = "role" placeholder = "Assign a role"><br> -->
-<label for="role">Assign a Role:</label>
-  <select name="role" id="role">
-    <option value="Manager">Manager</option>
-    <option value="HR">HR</option>
-    <option value="Mentor">Mentor</option>
-    <option value="Lead">Lead</option>
-  </select>
-  <br><br>
-<input type="hidden" name="name" value=<%=username%>><br>
-<input type = "submit" value = "Assign">
-</form>
-</center>
-
 <%
 statement.executeUpdate(sql);
 

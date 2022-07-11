@@ -15,7 +15,7 @@
 				<input type="text" required="required" name = name placeholder="UserName"> 
 			</div>
 			<div class="inputbox">
-				<input type="text" required="required" name = pass placeholder="Password"> 
+				<input type="password" required="required" name = pass placeholder="Password"> 
 			</div>
 			<div class="inputbox">
 				<input type="text" required="required" name = orgname placeholder="Organization Name"> 

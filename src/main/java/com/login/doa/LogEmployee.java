@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *  implementation class LoginAdmin
@@ -40,7 +41,27 @@ public class LogEmployee extends HttpServlet {
 //			response.sendRedirect("Added.jsp");
 //		}
 		else {
-			response.sendRedirect("Error.jsp");
+			PrintWriter out=response.getWriter();
+			response.setContentType("text/html");
+			out.println("<html>");
+			out.println("<head>");
+			/*out.println("<meta http-equiv=\"Content-Language\" content=\"en-us\">");
+			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">");
+			out.println("<meta name=\"GENERATOR\" content=\"Microsoft FrontPage 4.0\">");
+			out.println("<meta name=\"ProgId\" content=\"FrontPage.Editor.Document\">");*/
+			out.println("<title>");
+			out.println("Employee Home Page");
+			out.println("</TITLE>");
+			out.println("<SCRIPT LANGUAGE=javascript>");
+			out.println("<!--");
+			out.println("function window_onload() { alert(\"User Already Exist\") } ");
+			out.println("//-->");
+			out.println("</SCRIPT>");
+			out.println("</head>");
+			out.println("<body onload=window_onload()>");
+			out.println("</body>");
+			out.println("</html>");
+			//response.sendRedirect("Error.jsp");
 		}
 	}
 

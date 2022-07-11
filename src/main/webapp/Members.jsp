@@ -4,13 +4,14 @@
 <%@page import="java.sql.Connection"%>
 
 <%
+
+
+
 String driverName = "com.mysql.jdbc.Driver";
 String connectionUrl = "jdbc:mysql://localhost:3306/";
 String dbName = "logins";
 String userId = "root";
 String password = "password";
-int x = 1;
-
 try {
 Class.forName(driverName);
 } catch (ClassNotFoundException e) {
@@ -26,7 +27,10 @@ ResultSet resultSet = null;
 <!--  -->
 <link rel="stylesheet" href="Members.css">
 <head>
+<title>View Members</title>
 <body>
+
+
 <h2 align="center"><font><strong>Logged in as a Super Admin</strong></font></h2>
 <table align="center" cellpadding="5" cellspacing="5" border="1">
 <tr>
@@ -38,12 +42,21 @@ ResultSet resultSet = null;
 <td><b>Work status</b></td>
 <td><b>Approval Status</b></td>
 <td><b>Click To Add</b></td>
+
 </tr>
 <%
 try{ 
 connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 statement=connection.createStatement();
-String sql ="SELECT * FROM member";
+String orgname = (String)session.getAttribute("orgname");
+
+response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+
+if(session.getAttribute("orgname")==null){
+	response.sendRedirect("login.jsp");
+}
+
+String sql ="SELECT * FROM member WHERE Orgname = '"+orgname+"'";
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
@@ -63,8 +76,11 @@ while(resultSet.next()){
 	</tr>
 
 	<% 
+	
 
 }
+connection.close();
+statement.close();
 
 } catch (Exception e) {
 e.printStackTrace();
@@ -75,5 +91,13 @@ finally
 }
 %>
 </table>
+<center>
+<form action="Logout" method="post">
+<input type="submit" value="Logout">
+</form>
+<center>
+
 </body>
 </html>
+
+

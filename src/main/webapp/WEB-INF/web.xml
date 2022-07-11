@@ -89,4 +89,24 @@
     <servlet-name>LogEmployee</servlet-name>
     <url-pattern>/LogEmployee</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Assignrole</display-name>
+    <servlet-name>Assignrole</servlet-name>
+    <servlet-class>Assignrole</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Assignrole</servlet-name>
+    <url-pattern>/Assignrole</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
 </web-app>

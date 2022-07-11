@@ -5,7 +5,7 @@
 <head>
 <link rel = "stylesheet" href = "login.css">
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Admin Login </title>
 </head>
 <body>
 	<div class="center">
@@ -15,7 +15,7 @@
 				<input type="text" required="required" name = name placeholder="UserName"> 
 			</div>
 			<div class="inputbox">
-				<input type="text" required="required" name = pass placeholder="Password"> 
+				<input type="password" required="required" name = pass placeholder="Password"> 
 			</div>
 			<div class="inputbox">
 				<input type="text" required="required" name = orgname placeholder="Organization Name"> 
