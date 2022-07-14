@@ -31,7 +31,7 @@ ResultSet resultSet = null;
 <body>
 
 
-<h2 align="center"><font><strong>Logged in as a Super Admin</strong></font></h2>
+<h2 align="center"><font><strong>Logged in as a Employee</strong></font></h2>
 <table align="center" cellpadding="5" cellspacing="5" border="1">
 <tr>
 
@@ -40,23 +40,19 @@ ResultSet resultSet = null;
 >
 <td><b>UserName</b></td>
 <td><b>Work status</b></td>
-<td><b>Approval Status</b></td>
-<td><b>Click To Add</b></td>
+<td><b>Project code</b></td>
 
 </tr>
 <%
 try{ 
 connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 statement=connection.createStatement();
-String orgname = (String)session.getAttribute("orgname");
 
-response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+String projectid = (String)session.getAttribute("data");
 
-if(session.getAttribute("orgname")==null){
-	response.sendRedirect("login.jsp");
-}
+String username=session.getAttribute("data").toString();
 
-String sql ="SELECT * FROM member WHERE Orgname = '"+orgname+"'";
+String sql ="SELECT * FROM manager WHERE username = '"+username+"' and Approval = 'Approved'";
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
@@ -64,34 +60,31 @@ while(resultSet.next()){
 %>
 	<tr bgcolor="#DEB887">
 		<%
-		String username = resultSet.getString("username");
 		
 		String status = resultSet.getString("status");
 		
-		String approval = resultSet.getString("Approval");
+		String joinproject = resultSet.getString("Joinproject");
 		
-		if(status.equals("SuperAdmin")){
-			
-			continue;
-		}
+		
 		%>
 		
 		
 		<td><%=username%></td>
 		<td><%=resultSet.getString("status")%></td>
 		
-		
-		<td><form action="status" method = "post">
+		<!-- Approval status for a manager entry -->
+		<td><form action="role" method = "post">
 				<input type="hidden" name="name" value=<%=username%>><input
-					type="submit" value=<%=approval%>>
+					type="submit" value=<%=joinproject%>>
 			</form></td>
 		
-		<!-- Role assign for a member -->
-		
-		<td><form action="Included.jsp">
+		<!-- <td><form action="Included.jsp">
 				<input type="hidden" name="name" value=<%=username%>><input
 					type="submit" value="Assign Role">
-			</form></td>
+			</form></td>  -->
+			
+			<!-- Remove the selected entry -->
+			
 	</tr>
 
 	<% 
@@ -113,6 +106,11 @@ finally
 <center>
 <form action="Logout" method="post">
 <input type="submit" value="Logout">
+</form>
+
+<form action = "project.jsp" method = "post">
+<input type="hidden" name="projectid" value=projectid>
+<input type = "submit" value = "View Project">
 </form>
 <center>
 

@@ -35,7 +35,7 @@ public class loginmanager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.sendRedirect("logm.jsp");
+		response.sendRedirect("ManagerSigninup.jsp");
 	}
 
 }

@@ -57,7 +57,7 @@ public class LoginAdmin extends HttpServlet {
 		      
 		LogDoa doa = new LogDoa();
 //		insert ins = new insert();
-		if (doa.check(username,pass,orgname,manid,empid)) {
+		if (doa.insert(username,pass,orgname,manid,empid)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("orgname", orgname);
 			

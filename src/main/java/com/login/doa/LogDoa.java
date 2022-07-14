@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Random;
 
 import com.mysql.cj.protocol.Resultset;
 
@@ -13,15 +14,17 @@ public class LogDoa {
 	String sql = "INSERT INTO organization(orgname,managerid,employeeid)"+"values(?,?,?)";
 	String sql1= "INSERT INTO member(username,password,status,Approval,orgname)"+"values(?,?,?,?,?)";
 	
-	String sql4 = "select Orgname from member where Orgname=? and username=?";
+	String sql4 = "select Orgname from member where Orgname=? and username=? and password=?";
 	String sql5 = "select Orgname from member where Orgname=? and status='SuperAdmin'";
+	
+	
 	
 	
 	String url = "jdbc:mysql://localhost:3306/logins";
 	String uname = "root";
 	String pass = "password";
 	
-	public boolean check(String username,String password,String orgname,String managerid,String employeeid) {
+	public boolean insert(String username,String password,String orgname,String managerid,String employeeid) {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -32,6 +35,7 @@ public class LogDoa {
 			PreparedStatement st2 = conn.prepareStatement(sql4);
 			st2.setString(1, orgname);
 			st2.setString(2, username);
+			st2.setString(3, password);
 			
 			st2.executeQuery();
 			ResultSet rs = st2.executeQuery();
@@ -81,73 +85,131 @@ public class LogDoa {
 	}
 	
 	public boolean isthere(String orgname,String managerid,String username,String password) {
+		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	    StringBuilder sb = new StringBuilder();
+	    Random random = new Random();
+	    int length = 5;
+	    for(int i = 0; i < length; i++) {
+	      int index = random.nextInt(alphabet.length());
+	      char randomChar = alphabet.charAt(index);
+	      sb.append(randomChar);
+	    }
+	      String projectcode = sb.toString();
 		try {
-			String sql2 = "SELECT * FROM organization WHERE orgname = '" + orgname + "' and managerid =\"" + managerid+"\"";
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(url,uname,pass);
-			PreparedStatement ps = conn.prepareStatement(sql2);
-			//ps.setString(1, orgname);
-			//ps.setString(2, managerid);
-			ps.executeQuery();
+			String sql7 = "select * from member where username = '"+username+"' and Approval = 'Approved'";
+			PreparedStatement ps = conn.prepareStatement(sql7);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
-				//return true;
-				String sql3 = "insert into member(username,password,status,Approval,orgname)values(?,?,?,?,?)";
-				PreparedStatement ps1 = conn.prepareStatement(sql3);
-				ps1.setString(1, username);
-				ps1.setString(2, password);
-				ps1.setString(3, "Manager");
-				ps1.setString(4,"Pending");
-				ps1.setString(5,orgname);
-				
-				//ResultSet rs = ps1.executeUpdate(sql3);
-				//ps.executeUpdate();
-				if(ps1.executeUpdate()> 0) {
-					conn.close();
-					ps.close();
-					ps1.close();
-					return true;
-				}
+				return false;
 			}
+			//System.out.println("pending");
+//			String sql2 = "SELECT * FROM organization WHERE orgname = '" + orgname + "' and managerid =\"" + managerid+"\"";
+//			ps = conn.prepareStatement(sql2);
+//			rs = ps.executeQuery();
+//			if(rs.next()) {
+//				String sql5 = "insert into member(username,password,status,Approval,orgname)values(?,?,?,?,?)";
+//				ps = conn.prepareStatement(sql5);
+//				ps.setString(1, username);
+//				ps.setString(2, password);
+//				ps.setString(3, "Manager");
+//				ps.setString(4,"Pending");
+//				ps.setString(5,orgname);
+//				ps.executeUpdate();
+//				
+//				String sql6 = "INSERT INTO manager(username,password,status,Approval,joinproject)"+"values(?,?,?,?,?)";
+//				ps = conn.prepareStatement(sql6);
+//				ps.setString(1, username);
+//				ps.setString(2, password);
+//				ps.setString(3, "Manager");
+//				ps.setString(4, "Approved");
+//				ps.setString(5, projectcode);
+//				ps.executeUpdate();
+//				return true;
+//			}
 			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return true;
 	}
 	public boolean issthere(String orgname,String employeeid,String username,String password) {
+		
+		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	    StringBuilder sb = new StringBuilder();
+	    Random random = new Random();
+	    int length = 5;
+	    for(int i = 0; i < length; i++) {
+	      int index = random.nextInt(alphabet.length());
+	      char randomChar = alphabet.charAt(index);
+	      sb.append(randomChar);
+	    }
+	      String projectcode = sb.toString();
 		try {
-			String sql2 = "SELECT * FROM organization WHERE orgname = '" + orgname + "' and employeeid =\"" + employeeid+"\"";
+			
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(url,uname,pass);
-			PreparedStatement ps = conn.prepareStatement(sql2);
-			//ps.setString(1, orgname);
-			//ps.setString(2, managerid);
-			ps.executeQuery();
-			ResultSet rs = ps.executeQuery(sql2);
+			String sql7 = "select * from member where username = '"+username+"'";
+			PreparedStatement ps = conn.prepareStatement(sql7);
+			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
-				String sql3 = "insert into member(username,password,status,Approval,orgname)values(?,?,?,?,?)";
-				PreparedStatement ps1 = conn.prepareStatement(sql3);
-				ps1.setString(1, username);
-				ps1.setString(2,password);
-				ps1.setString(3, "Employee");
-				ps1.setString(4,"Pending");
-				ps1.setString(5,orgname);
-				if(ps1.executeUpdate() > 0) {
-					conn.close();
-					ps.close();
-					ps1.close();
-					
-					return true;
-				}
+				return false;
+			}
+				
+			String sql2 = "SELECT * FROM organization WHERE orgname = '" + orgname + "' and employeeid =\"" + employeeid+"\"";
+			ps = conn.prepareStatement(sql2);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				String sql5 = "insert into member(username,password,status,Approval,orgname)values(?,?,?,?,?)";
+				ps = conn.prepareStatement(sql5);
+				ps.setString(1, username);
+				ps.setString(2, password);
+				ps.setString(3, "Employee");
+				ps.setString(4,"Pending");
+				ps.setString(5,orgname);
+				ps.executeUpdate();
+				
+				String sql6 = "INSERT INTO manager(username,password,status,Approval,joinproject)"+"values(?,?,?,?,?)";
+				ps = conn.prepareStatement(sql6);
+				ps.setString(1, username);
+				ps.setString(2, password);
+				ps.setString(3, "Employee");
+				ps.setString(4, "pending");
+				ps.setString(5, projectcode);
+				ps.executeUpdate();
+			
+//			String sql2 = "SELECT * FROM organization WHERE orgname = '" + orgname + "' and employeeid =\"" + employeeid+"\"";
+//			Class.forName("com.mysql.jdbc.Driver");
+//			Connection conn = DriverManager.getConnection(url,uname,pass);
+//			PreparedStatement ps = conn.prepareStatement(sql2);
+//			//ps.setString(1, orgname);
+//			//ps.setString(2, managerid);
+//			ps.executeQuery();
+//			ResultSet rs = ps.executeQuery(sql2);
+//			if(rs.next()) {
+//				String sql3 = "insert into member(username,password,status,Approval,orgname)values(?,?,?,?,?)";
+//				PreparedStatement ps1 = conn.prepareStatement(sql3);
+//				ps1.setString(1, username);
+//				ps1.setString(2,password);
+//				ps1.setString(3, "Employee");
+//				ps1.setString(4,"Pending");
+//				ps1.setString(5,orgname);
+//				if(ps1.executeUpdate() > 0) {
+//					conn.close();
+//					ps.close();
+//					ps1.close();
+//					
+//					return true;
+				
 			}
 			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return true;
 	}
 }
 

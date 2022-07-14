@@ -41,21 +41,22 @@ connection = DriverManager.getConnection(connectionUrl+dbName, userId, password)
 statement=connection.createStatement();
 String username = request.getParameter("name");
 
+String projectid = request.getParameter("projectid");
+
 //String sql ="UPDATE member set Approval = 'Approved' where username = '"+username+"'" ;
 %>
 <center>
-<form action = "assignrole.jsp" method = "post">
+<form action = "assignmanagerrole.jsp" method = "post">
 <!-- <input type = "text" name = "role" placeholder = "Assign a role"><br> -->
 <label for="role">Assign a Role:</label>
   <select name="role" id="role">
-    <option value="Manager">Manager</option>
-    <option value="Employee">Employee</option>
-    <option value="HR">HR</option>
-    <option value="Mentor">Mentor</option>
-    <option value="Lead">Lead</option>
+    <option value="Team Lead">Team Lead</option>
+    <option value="Team Member">Team Member</option>
+ 
   </select>
   <br><br>
-<input type="hidden" name="name" value=<%=username%>><br>
+<input type="hidden" name="name" value=<%=username%>>
+<input type="hidden" name="projectid" value=<%=projectid%>><br>
 <input type = "submit" value = "Assign">
 </form>
 </center>

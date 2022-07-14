@@ -36,10 +36,7 @@ public class LogEmployee extends HttpServlet {
 		if (doa.issthere(orgname, employeeid,username,password)) {
 			response.sendRedirect("idadded.jsp");
 		}
-//		 else if(ins.add(uname, pass,stat)){
-//			
-//			response.sendRedirect("Added.jsp");
-//		}
+
 		else {
 			PrintWriter out=response.getWriter();
 			response.setContentType("text/html");
@@ -61,7 +58,7 @@ public class LogEmployee extends HttpServlet {
 			out.println("<body onload=window_onload()>");
 			out.println("</body>");
 			out.println("</html>");
-			//response.sendRedirect("Error.jsp");
+			
 		}
 	}
 

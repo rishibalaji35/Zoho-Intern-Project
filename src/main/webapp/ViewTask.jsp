@@ -31,32 +31,26 @@ ResultSet resultSet = null;
 <body>
 
 
-<h2 align="center"><font><strong>Logged in as a Super Admin</strong></font></h2>
+<h2 align="center"><font><strong>Logged in as a Manager</strong></font></h2>
 <table align="center" cellpadding="5" cellspacing="5" border="1">
 <tr>
 
 </tr>
 <tr bgcolor="#A52A2A">
 >
-<td><b>UserName</b></td>
-<td><b>Work status</b></td>
-<td><b>Approval Status</b></td>
-<td><b>Click To Add</b></td>
+<td><b>Task</b></td>
+<!--<td><b>Assigned By</b></td>
+  <td><b>Assigned For</b></td>
+ <td><b>Assign Role</b></td>  
+ <td><b>Click To Remove</b></td> -->
 
 </tr>
 <%
 try{ 
 connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 statement=connection.createStatement();
-String orgname = (String)session.getAttribute("orgname");
 
-response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
-
-if(session.getAttribute("orgname")==null){
-	response.sendRedirect("login.jsp");
-}
-
-String sql ="SELECT * FROM member WHERE Orgname = '"+orgname+"'";
+String sql ="SELECT * FROM task" ;
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
@@ -64,34 +58,17 @@ while(resultSet.next()){
 %>
 	<tr bgcolor="#DEB887">
 		<%
-		String username = resultSet.getString("username");
+		String taskname = resultSet.getString("taskname");
 		
-		String status = resultSet.getString("status");
+		//String status = resultSet.getString("status");
 		
-		String approval = resultSet.getString("Approval");
+		//String approval = resultSet.getString("Approval");
 		
-		if(status.equals("SuperAdmin")){
-			
-			continue;
-		}
 		%>
 		
 		
-		<td><%=username%></td>
-		<td><%=resultSet.getString("status")%></td>
+		<td><%=taskname%></td>
 		
-		
-		<td><form action="status" method = "post">
-				<input type="hidden" name="name" value=<%=username%>><input
-					type="submit" value=<%=approval%>>
-			</form></td>
-		
-		<!-- Role assign for a member -->
-		
-		<td><form action="Included.jsp">
-				<input type="hidden" name="name" value=<%=username%>><input
-					type="submit" value="Assign Role">
-			</form></td>
 	</tr>
 
 	<% 
@@ -110,11 +87,7 @@ finally
 }
 %>
 </table>
-<center>
-<form action="Logout" method="post">
-<input type="submit" value="Logout">
-</form>
-<center>
+
 
 </body>
 </html>

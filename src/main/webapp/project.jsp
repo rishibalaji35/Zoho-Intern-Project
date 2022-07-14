@@ -31,7 +31,7 @@ ResultSet resultSet = null;
 <body>
 
 
-<h2 align="center"><font><strong>Logged in as a Super Admin</strong></font></h2>
+<h2 align="center"><font><strong>Logged in as a Manager</strong></font></h2>
 <table align="center" cellpadding="5" cellspacing="5" border="1">
 <tr>
 
@@ -40,23 +40,26 @@ ResultSet resultSet = null;
 >
 <td><b>UserName</b></td>
 <td><b>Work status</b></td>
-<td><b>Approval Status</b></td>
-<td><b>Click To Add</b></td>
+<!--<td> <b>Approval Status</b></td> -->
+<td><b>Assign Role</b></td> 
+<!-- <td><b>Click To Remove</b></td> -->
+<td>Deadline</td>
 
 </tr>
 <%
 try{ 
 connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 statement=connection.createStatement();
-String orgname = (String)session.getAttribute("orgname");
+//String username = (String)session.getAttribute("username");
+//String projectid = (String)request.getAttribute("data");
 
 response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
 
-if(session.getAttribute("orgname")==null){
-	response.sendRedirect("login.jsp");
-}
+//String projectid = (String)request.getAttribute("data");
+String projectid = (String)session.getAttribute("data");
 
-String sql ="SELECT * FROM member WHERE Orgname = '"+orgname+"'";
+
+String sql ="SELECT * FROM manager WHERE Joinproject = '"+projectid+"' and Approval = 'Approved'";
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
@@ -70,7 +73,9 @@ while(resultSet.next()){
 		
 		String approval = resultSet.getString("Approval");
 		
-		if(status.equals("SuperAdmin")){
+
+		
+		if(status.equals("Manager")){
 			
 			continue;
 		}
@@ -78,20 +83,18 @@ while(resultSet.next()){
 		
 		
 		<td><%=username%></td>
+		
 		<td><%=resultSet.getString("status")%></td>
 		
-		
-		<td><form action="status" method = "post">
-				<input type="hidden" name="name" value=<%=username%>><input
-					type="submit" value=<%=approval%>>
-			</form></td>
-		
-		<!-- Role assign for a member -->
-		
-		<td><form action="Included.jsp">
-				<input type="hidden" name="name" value=<%=username%>><input
+		 <td><form action="include.jsp">
+				<input type="hidden" name="name" value=<%=username%>>
+				<input type="hidden" name="projectid" value=<%=projectid%>><input
 					type="submit" value="Assign Role">
-			</form></td>
+			</form></td> 
+		
+			<td><input type="date" id="start" name="trip-start"
+       value="2021-08-22"
+       min="2021-01-01" max="2021-12-31"></td>
 	</tr>
 
 	<% 
@@ -114,6 +117,17 @@ finally
 <form action="Logout" method="post">
 <input type="submit" value="Logout">
 </form>
+
+<form action = "Task" method = "post">
+<input type = "text" name = task id = "task">
+<input type = "Submit" value = "Create Task">
+</form>
+
+<form action = "ViewTask.jsp" method = "post">
+<input type = "Submit" value = "View Task">
+</form>
+
+
 <center>
 
 </body>

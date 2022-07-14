@@ -10,17 +10,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
  *  implementation class LoginAdmin
  */
-@webServlet("/Logman")
+@webServlet("/Log")
 
-public class Logman extends HttpServlet {
+public class Log extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +41,7 @@ public class Logman extends HttpServlet {
 		
 		LogDoa doa = new LogDoa();
 		if (doa.isthere(orgname, managerid,name,pass)) {
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("idadded.jsp");
 		}
 //		 else if(ins.add(uname, pass,stat)){
 //			
@@ -71,18 +69,9 @@ public class Logman extends HttpServlet {
 			out.println("</body>");
 			out.println("</html>");*/
 			
-//			request.setAttribute("data",projectid);
-//			RequestDispatcher rd = request.getRequestDispatcher("Manager.jsp");
-//			rd.forward(request, response);
-			
-			
-			HttpSession session = request.getSession();
-			String project=request.getParameter("data");
-			session.setAttribute("data",projectid);
-			
-			
-			response.sendRedirect("Manager.jsp");
-			
+			request.setAttribute("data",projectid);
+			RequestDispatcher rd = request.getRequestDispatcher("project.jsp");
+			rd.forward(request, response);
 			
 			//response.sendRedirect("Manager.jsp");
 		}

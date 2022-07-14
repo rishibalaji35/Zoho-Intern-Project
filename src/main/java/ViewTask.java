@@ -8,15 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class loginemp
+ * Servlet implementation class ViewTask
  */
-public class loginemp extends HttpServlet {
+public class ViewTask extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginemp() {
+    public ViewTask() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,8 @@ public class loginemp extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("Employeesigninup.jsp");
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
