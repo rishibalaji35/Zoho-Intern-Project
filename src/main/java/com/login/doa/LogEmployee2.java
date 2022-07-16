@@ -63,7 +63,9 @@ public class LogEmployee2 extends HttpServlet {
 			HttpSession session = request.getSession();
 			String project=request.getParameter("data");
 			session.setAttribute("data",username);
-			response.sendRedirect("Employee.jsp");
+			//response.sendRedirect("Employee.jsp");
+			response.sendRedirect("Employee1.jsp");
+						
 		}
 	}
 

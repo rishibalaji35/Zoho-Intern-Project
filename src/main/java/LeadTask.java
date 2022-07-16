@@ -15,8 +15,8 @@ import java.io.IOException;
 /**
  * Servlet implementation class status
  */
-@webServlet("/Task")
-public class Task extends HttpServlet {
+@webServlet("/LeadTask")
+public class LeadTask extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
@@ -41,24 +41,25 @@ public class Task extends HttpServlet {
 		//ResultSet resultSet = null;
 		
 		try{ 
-			String name = request.getParameter("name");
+			//String name = request.getParameter("name");
 			connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 			
 			String taskname = request.getParameter("task");
 			String assignedby = request.getParameter("assignedby");
 			String assignedfor = request.getParameter("assignedfor");
-			String projectname = request.getParameter("projectname");
+			String Deadline = request.getParameter("Deadline");
 
-			String sql ="insert into task(taskname,assignedby,assignedfor,projectname) values(?,?,?,?)";
+			String sql ="insert into task(taskname,assignedby,assignedfor,Deadline) values(?,?,?,?)";
 			
 			
 			statement=connection.prepareStatement(sql);
 			statement.setString(1, taskname);
 			statement.setString(2, assignedby);
 			statement.setString(3, assignedfor);
-			statement.setString(4, projectname);
+			statement.setString(4, Deadline);
 			statement.executeUpdate();
-			response.sendRedirect("viewproject.jsp");
+			
+			response.sendRedirect("TeamLeadTask.jsp");
 			connection.close();
 			statement.close();
 			

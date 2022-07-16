@@ -10,13 +10,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
  * Servlet implementation class status
  */
-@webServlet("/Task")
-public class Task extends HttpServlet {
+@webServlet("/Addintoproject")
+public class Addintoproject extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
@@ -38,37 +40,60 @@ public class Task extends HttpServlet {
 
 		Connection connection = null;
 		PreparedStatement statement = null;
-		//ResultSet resultSet = null;
+		ResultSet resultSet = null;
 		
 		try{ 
-			String name = request.getParameter("name");
+			
 			connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 			
-			String taskname = request.getParameter("task");
-			String assignedby = request.getParameter("assignedby");
-			String assignedfor = request.getParameter("assignedfor");
 			String projectname = request.getParameter("projectname");
-
-			String sql ="insert into task(taskname,assignedby,assignedfor,projectname) values(?,?,?,?)";
+			String name = request.getParameter("name");
+			String status = request.getParameter("status");
+			String approval = request.getParameter("approval");
+			
+			String sql2 = "select * from member where username = '"+name+"' and Approval = 'Approved'";
+			
+			statement = connection.prepareStatement(sql2);
+			
+			resultSet = statement.executeQuery(sql2);
+			
+			if(!resultSet.next()) {
+				response.sendRedirect("Error.jsp");
+			}
+			else {
+			
+			String sql1 = "select * from projectmember where member = '"+name+"' and projectname = '"+projectname+"'";
+			
+			statement = connection.prepareStatement(sql1);
+			
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				response.sendRedirect("Error.jsp");
+			}
+			else {
+			String sql ="insert into projectmember(projectname,member,memberrole) values(?,?,?)";
 			
 			
 			statement=connection.prepareStatement(sql);
-			statement.setString(1, taskname);
-			statement.setString(2, assignedby);
-			statement.setString(3, assignedfor);
-			statement.setString(4, projectname);
+			statement.setString(1, projectname);
+			statement.setString(2, name);
+			statement.setString(3, status);
 			statement.executeUpdate();
-			response.sendRedirect("viewproject.jsp");
+			
+			response.sendRedirect("Manager1.jsp");
+			
 			connection.close();
 			statement.close();
 			
 			
-			} catch (Exception e) {
+			}
+			}
+		}catch (Exception e) {
 			e.printStackTrace();
 			}
 			finally
 			{
-			    System.out.println("finally block executed");
+			    System.out.println("Already Exist");
 			}
 	}
 }

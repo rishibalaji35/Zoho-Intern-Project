@@ -209,4 +209,54 @@
     <servlet-name>LogEmployee2</servlet-name>
     <url-pattern>/LogEmployee2</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LeadTask</display-name>
+    <servlet-name>LeadTask</servlet-name>
+    <servlet-class>LeadTask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LeadTask</servlet-name>
+    <url-pattern>/LeadTask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>createproject</display-name>
+    <servlet-name>createproject</servlet-name>
+    <servlet-class>createproject</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createproject</servlet-name>
+    <url-pattern>/createproject</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Addintoproject</display-name>
+    <servlet-name>Addintoproject</servlet-name>
+    <servlet-class>Addintoproject</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Addintoproject</servlet-name>
+    <url-pattern>/Addintoproject</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>delete1</display-name>
+    <servlet-name>delete1</servlet-name>
+    <servlet-class>delete1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>delete1</servlet-name>
+    <url-pattern>/delete1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>role1</display-name>
+    <servlet-name>role1</servlet-name>
+    <servlet-class>role1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>role1</servlet-name>
+    <url-pattern>/role1</url-pattern>
+  </servlet-mapping>
 </web-app>

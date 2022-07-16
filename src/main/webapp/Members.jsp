@@ -56,7 +56,7 @@ if(session.getAttribute("orgname")==null){
 	response.sendRedirect("login.jsp");
 }
 
-String sql ="SELECT * FROM member WHERE Orgname = '"+orgname+"'";
+String sql ="SELECT * FROM member WHERE Orgname = '"+orgname+"' ORDER BY status DESC";
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
@@ -70,15 +70,17 @@ while(resultSet.next()){
 		
 		String approval = resultSet.getString("Approval");
 		
-		if(status.equals("SuperAdmin")){
-			
-			continue;
-		}
+		
 		%>
 		
 		
 		<td><%=username%></td>
 		<td><%=resultSet.getString("status")%></td>
+		
+		<%if(status.equals("SuperAdmin")){
+			
+			continue;
+		} %>
 		
 		
 		<td><form action="status" method = "post">

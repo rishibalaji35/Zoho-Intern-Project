@@ -40,9 +40,10 @@ ResultSet resultSet = null;
 >
 <td><b>UserName</b></td>
 <td><b>Work status</b></td>
-<td><b>Approval Status</b></td>
+<td><b>Approval</b></td>
+<td><b>Add into Project</b></td>
  <!--<td><b>Assign Role</b></td>   -->
-<td><b>Click To Remove</b></td>
+ <td><b>Click To Remove</b></td>
 
 </tr>
 <%
@@ -51,7 +52,7 @@ connection = DriverManager.getConnection(connectionUrl+dbName, userId, password)
 statement=connection.createStatement();
 //String username = (String)session.getAttribute("username");
 
-String projectid = (String)session.getAttribute("data");
+//String projectid = (String)session.getAttribute("data");
 
 //String projectid = (String)request.getAttribute("data");
 
@@ -59,10 +60,10 @@ String projectid = (String)session.getAttribute("data");
 //RequestDispatcher rd = request.getRequestDispatcher("project.jsp");
 //rd.forward(request, response);
 
-String project=request.getParameter("data");
-session.setAttribute("data",projectid);
+//String project=request.getParameter("data");
+//session.setAttribute("data",projectid);
 
-String sql ="SELECT * FROM manager WHERE Joinproject = '"+projectid+"'";
+String sql ="SELECT * FROM member order by status desc";
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
@@ -76,37 +77,39 @@ while(resultSet.next()){
 		
 		String approval = resultSet.getString("Approval");
 		
-		
-		
+		if(status.equals("SuperAdmin")){			
+			continue;
+		}
 		%>
 		
 		
 		<td><%=username%></td>
 		<td><%=resultSet.getString("status")%></td>
-		
-		<!-- Approval status for a manager entry -->
-		<td><form action="role" method = "post">
+		<td><form action="status" method = "post">
 				<input type="hidden" name="name" value=<%=username%>><input
 					type="submit" value=<%=approval%>>
 			</form></td>
 		
-		<!-- <td><form action="Included.jsp">
-				<input type="hidden" name="name" value=<%=username%>><input
-					type="submit" value="Assign Role">
-			</form></td>  -->
+		<!-- Approval status for a manager entry -->
+		<td><form action="Addintoproject.jsp" method = "post">
+				<input type="hidden" name="name" value=<%=username%>><input type="hidden" name="status" value=<%=status%>>
+				<input type="hidden" name="approval" value=<%=approval%>>
+				<input type="submit" value= Addintoproject>
+			</form></td>
 			
-			<!-- Remove the selected entry -->
-			
-			<%
-				if(status.equals("Employee")){			
-			%>
-			
-			<td><form action="delete" method = "post">
-			<input type="hidden" name="projectid" value=<%=projectid%>>
+			<%if(status.equals("Employee")){
+				
+			 %>
+			<td><form action="delete1" method = "post">
 				<input type="hidden" name="username" value=<%=username%>><input
 					type="submit" value="Remove">
 			</form></td>
-			<% }%>
+		
+	<%} %>
+			
+			<!-- Remove the selected entry -->
+			
+			
 	</tr>
 
 	<% 
@@ -126,9 +129,14 @@ finally
 %>
 </table>
 <center>
-<form action = "project.jsp" method = "post">
+<form action = "createproject.jsp" method = "post">
 <input type="hidden" name="projectid" value=projectid>
 <input type = "submit" value = "Create Project">
+</form>
+<br>
+<form action = "viewproject1.jsp" method = "post">
+<input type="hidden" name="projectid" value=projectid>
+<input type = "submit" value = "View Project">
 </form>
 <br>
 <form action="Logout" method="post">

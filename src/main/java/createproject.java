@@ -10,13 +10,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
  * Servlet implementation class status
  */
-@webServlet("/Task")
-public class Task extends HttpServlet {
+@webServlet("/createproject")
+public class createproject extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
@@ -41,24 +43,24 @@ public class Task extends HttpServlet {
 		//ResultSet resultSet = null;
 		
 		try{ 
-			String name = request.getParameter("name");
-			connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 			
-			String taskname = request.getParameter("task");
-			String assignedby = request.getParameter("assignedby");
-			String assignedfor = request.getParameter("assignedfor");
+			connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 			String projectname = request.getParameter("projectname");
+			String description = request.getParameter("description");
+			String deadline = request.getParameter("Deadline");
 
-			String sql ="insert into task(taskname,assignedby,assignedfor,projectname) values(?,?,?,?)";
+			String sql ="insert into project(projectname,description,Deadline) values(?,?,?)";
 			
 			
 			statement=connection.prepareStatement(sql);
-			statement.setString(1, taskname);
-			statement.setString(2, assignedby);
-			statement.setString(3, assignedfor);
-			statement.setString(4, projectname);
+			statement.setString(1, projectname);
+			statement.setString(2, description);
+			statement.setString(3, deadline);
 			statement.executeUpdate();
-			response.sendRedirect("viewproject.jsp");
+			HttpSession session = request.getSession();
+			String username=request.getParameter("data");
+			session.setAttribute("data",projectname);
+			response.sendRedirect("Manager1.jsp");
 			connection.close();
 			statement.close();
 			

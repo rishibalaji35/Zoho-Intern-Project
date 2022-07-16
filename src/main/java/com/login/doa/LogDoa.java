@@ -84,7 +84,7 @@ public class LogDoa {
 		return false;
 	}
 	
-	public boolean isthere(String orgname,String managerid,String username,String password) {
+	public boolean isthere(String orgname,String username,String password) {
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	    StringBuilder sb = new StringBuilder();
 	    Random random = new Random();

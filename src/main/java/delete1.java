@@ -15,8 +15,8 @@ import java.io.IOException;
 /**
  * Servlet implementation class status
  */
-@webServlet("/Task")
-public class Task extends HttpServlet {
+@webServlet("/delete1")
+public class delete1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
@@ -37,32 +37,32 @@ public class Task extends HttpServlet {
 		}
 
 		Connection connection = null;
-		PreparedStatement statement = null;
-		//ResultSet resultSet = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
 		
 		try{ 
-			String name = request.getParameter("name");
 			connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
-			
-			String taskname = request.getParameter("task");
-			String assignedby = request.getParameter("assignedby");
-			String assignedfor = request.getParameter("assignedfor");
-			String projectname = request.getParameter("projectname");
+			statement=connection.createStatement();
+			String username = request.getParameter("username");
 
-			String sql ="insert into task(taskname,assignedby,assignedfor,projectname) values(?,?,?,?)";
-			
-			
-			statement=connection.prepareStatement(sql);
-			statement.setString(1, taskname);
-			statement.setString(2, assignedby);
-			statement.setString(3, assignedfor);
-			statement.setString(4, projectname);
-			statement.executeUpdate();
-			response.sendRedirect("viewproject.jsp");
+			String sql ="DELETE FROM member where username = '"+username+"'" ;
+			statement.executeUpdate(sql);
+			String sql1 ="DELETE FROM manager where username = '"+username+"'" ;
+			statement.executeUpdate(sql1);
+			String sql2 ="DELETE FROM manager where username = '"+username+"'" ;
+			statement.executeUpdate(sql2);
+			String sql3 ="DELETE FROM task where assignedby = '"+username+"'" ;
+			statement.executeUpdate(sql3);
+			String sql4 ="DELETE FROM task where assignedfor = '"+username+"'" ;
+			statement.executeUpdate(sql4);
+			String sql5 ="DELETE FROM projectmember where member = '"+username+"'" ;
+			statement.executeUpdate(sql5);
+			//String sql1 = "update manager set status = 'Manager' where username = '"+username+"'";
+			//statement.executeUpdate(sql1);
 			connection.close();
 			statement.close();
-			
-			
+			response.sendRedirect("Manager.jsp");
+
 			} catch (Exception e) {
 			e.printStackTrace();
 			}

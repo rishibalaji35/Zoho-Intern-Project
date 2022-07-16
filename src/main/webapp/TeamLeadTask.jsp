@@ -41,26 +41,29 @@ ResultSet resultSet = null;
 <td><b>UserName</b></td>
 <td><b>Work status</b></td>
 <td><b>Project code</b></td>
-<td><b>Assign Task</b></td>
-
+<!-- <td><b>Assign Task</b></td> -->
 </tr>
 <%
 try{ 
 connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 statement=connection.createStatement();
 
-String projectid = (String)session.getAttribute("data");
+//String projectid = (String)session.getAttribute("data");
 
-String username=session.getAttribute("data").toString();
+//String username=session.getAttribute("data").toString();
 
-String sql ="SELECT * FROM manager WHERE username = '"+username+"' and Approval = 'Approved'";
+String projectid = request.getParameter("projectid");
+
+String sql ="SELECT * FROM manager WHERE Joinproject = '"+projectid+"' and status = 'Team Member'";
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
 	//int index = resultSet.getInt(1);
 %>
 	<tr bgcolor="#DEB887">
+
 		<%
+		String username = resultSet.getString("username");
 		
 		String status = resultSet.getString("status");
 		
@@ -109,9 +112,23 @@ finally
 }
 %>
 </table>
+<br><br><br>
 <center>
 
-<br><br>
+
+<form action="LeadTask" method = "post">
+<input type = "text" name = task placeholder = "Create a Task"><br>
+<br>
+<input type = "text" name = assignedby placeholder = "Assigned By"><br>
+<br>
+<input type = "text" name = assignedfor placeholder = "Assigned For"><br>
+<br>
+<input type = "text" name = Deadline placeholder = "Fix a DeadLine"><br>
+<br>
+<input type = "submit" value = "Assign Task">
+</form>
+<br>
+
 <form action="Logout" method="post">
 <input type="submit" value="Logout">
 </form>

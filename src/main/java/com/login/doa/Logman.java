@@ -33,7 +33,7 @@ public class Logman extends HttpServlet {
 		String pass = request.getParameter("pass");
 		
 		String orgname = request.getParameter("orgname");
-		String managerid = request.getParameter("managerID");
+		//String managerid = request.getParameter("managerID");
 		String projectid = request.getParameter("projectID");
 		
 		
@@ -42,7 +42,7 @@ public class Logman extends HttpServlet {
 		
 		
 		LogDoa doa = new LogDoa();
-		if (doa.isthere(orgname, managerid,name,pass)) {
+		if (doa.isthere(orgname,name,pass)) {
 			response.sendRedirect("home.jsp");
 		}
 //		 else if(ins.add(uname, pass,stat)){
@@ -79,10 +79,11 @@ public class Logman extends HttpServlet {
 			HttpSession session = request.getSession();
 			String project=request.getParameter("data");
 			session.setAttribute("data",projectid);
+//			String username=request.getParameter("name");
+//			session.setAttribute("name",name);
 			
-			
-			response.sendRedirect("Manager.jsp");
-			
+			//response.sendRedirect("Manager.jsp");
+			response.sendRedirect("Manager1.jsp");
 			
 			//response.sendRedirect("Manager.jsp");
 		}

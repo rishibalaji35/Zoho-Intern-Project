@@ -18,7 +18,7 @@ public class LogDoa1 {
 		
 		String sql4 = "select * from member where username = '"+username+"' and Approval = 'Approved'";
 		
-		String sql3 = "SELECT * FROM manager where Joinproject = '"+projectid+"'";
+		String sql3 = "SELECT * FROM manager where Joinproject = '"+projectid+"' and status = 'Manager'";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(url,uname,pass);

@@ -40,7 +40,7 @@ public class Log extends HttpServlet {
 		
 		
 		LogDoa doa = new LogDoa();
-		if (doa.isthere(orgname, managerid,name,pass)) {
+		if (doa.isthere(orgname,name,pass)) {
 			response.sendRedirect("idadded.jsp");
 		}
 //		 else if(ins.add(uname, pass,stat)){
