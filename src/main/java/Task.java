@@ -48,8 +48,9 @@ public class Task extends HttpServlet {
 			String assignedby = request.getParameter("assignedby");
 			String assignedfor = request.getParameter("assignedfor");
 			String projectname = request.getParameter("projectname");
+			String deadline = request.getParameter("Deadline");
 
-			String sql ="insert into task(taskname,assignedby,assignedfor,projectname) values(?,?,?,?)";
+			String sql ="insert into task(taskname,assignedby,assignedfor,projectname,Deadline) values(?,?,?,?,?)";
 			
 			
 			statement=connection.prepareStatement(sql);
@@ -57,6 +58,7 @@ public class Task extends HttpServlet {
 			statement.setString(2, assignedby);
 			statement.setString(3, assignedfor);
 			statement.setString(4, projectname);
+			statement.setString(5, deadline);
 			statement.executeUpdate();
 			response.sendRedirect("viewproject.jsp");
 			connection.close();

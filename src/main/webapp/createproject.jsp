@@ -20,7 +20,7 @@
 				<input type="text" required="required" name = description placeholder="Description"> 
 			</div>
 			<div class="inputbox">
-				<input type="text" required="required" name = Deadline placeholder="Fix a DeadLine"> 
+				<input type="Date" required="required" name = Deadline placeholder="Fix a DeadLine"> 
 			</div>
 			<div class="inputbox">
 				<input type="submit" value="submit">

@@ -17,9 +17,10 @@
 			<div class="inputbox">
 				<input type="password" required="required" name = pass placeholder="Password"> 
 			</div>
-			<div class="inputbox">
+			<!-- <div class="inputbox">
 				<input type="text" required="required" name=employeeID placeholder="Employee ID"> 
-			</div>
+			</div> -->
+			
 			
 			<div class="inputbox">
 				<input type="submit" value="Sign in">

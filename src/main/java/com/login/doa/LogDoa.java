@@ -98,7 +98,7 @@ public class LogDoa {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(url,uname,pass);
-			String sql7 = "select * from member where username = '"+username+"' and Approval = 'Approved'";
+			String sql7 = "select * from member where username = '"+username+"' and Approval = 'Approved' and status='Manager'";
 			PreparedStatement ps = conn.prepareStatement(sql7);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {

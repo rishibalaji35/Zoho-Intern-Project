@@ -31,7 +31,7 @@ ResultSet resultSet = null;
 <body>
 
 
-<h2 align="center"><font><strong>Logged in as a Manager</strong></font></h2>
+<h2 align="center"><font><strong>Task Details</strong></font></h2>
 <table align="center" cellpadding="5" cellspacing="5" border="1">
 <tr>
 
@@ -39,18 +39,19 @@ ResultSet resultSet = null;
 <tr bgcolor="#A52A2A">
 >
 <td><b>Task</b></td>
-<!--<td><b>Assigned By</b></td>
+ <td><b>Assigned By</b></td>
   <td><b>Assigned For</b></td>
- <td><b>Assign Role</b></td>  
- <td><b>Click To Remove</b></td> -->
+ <td><b>Project Name</b></td>  
+ <td><b>DeadLine</b></td>
 
 </tr>
 <%
 try{ 
 connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
 statement=connection.createStatement();
+String projectname = request.getParameter("projectname");
 
-String sql ="SELECT * FROM task" ;
+String sql ="SELECT * FROM task where projectname = '"+projectname+"'order by Deadline" ;
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
@@ -68,6 +69,10 @@ while(resultSet.next()){
 		
 		
 		<td><%=taskname%></td>
+		<td><%=resultSet.getString("assignedby")%></td>
+		<td><%=resultSet.getString("assignedfor")%></td>
+		<td><%=resultSet.getString("projectname")%></td>
+		<td><%=resultSet.getString("Deadline")%></td>
 		
 	</tr>
 

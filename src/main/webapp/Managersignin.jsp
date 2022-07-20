@@ -21,9 +21,9 @@
 				<input type="text" required="required" name=managerID placeholder="Manager ID"> 
 			</div> -->
 			
-			<div class="inputbox">
+			<!-- <div class="inputbox">
 				<input type="text" required="required" name=projectID placeholder="project ID"> 
-			</div>
+			</div> -->
 			
 			<div class="inputbox">
 				<input type="submit" value="Sign in">

@@ -89,8 +89,7 @@ while(resultSet.next()){
 	
 
 }
-connection.close();
-statement.close();
+
 
 } catch (Exception e) {
 e.printStackTrace();
@@ -112,12 +111,29 @@ finally
 <br>
 <input type = "text" name = assignedfor placeholder = "Assigned For"><br>
 <br>
-<input type = "text" name = Deadline placeholder = "Fix a DeadLine"><br>
+<input type = "text" name = projectname placeholder = "Project Name"><br>
 <br>
+<% 
+String projectname = request.getParameter("projectname");
+String sql1 = "select Deadline from project where projectname = '"+projectname+"'";
+
+resultSet = statement.executeQuery(sql1);
+while(resultSet.next()){
+%>
+<input type = "Date" min="2010-01-01" max=<%=resultSet.getString("Deadline")%> name = Deadline placeholder = "Fix a DeadLine"><br>
+<%} %>
+<br>
+<input type = "hidden" name="projectname">
 <input type = "submit" value = "Assign Task">
 </form>
 <br>
 
+<form action="ViewTask1.jsp" method="post">
+<input type = "text" name = projectname >
+<!-- <input type = "hidden" name="projectname"> -->
+<input type="submit" value="ViewTask">
+</form>
+<br>
 <form action="Logout" method="post">
 <input type="submit" value="Logout">
 </form>

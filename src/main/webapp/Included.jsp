@@ -50,9 +50,7 @@ String username = request.getParameter("name");
   <select name="role" id="role">
     <option value="Manager">Manager</option>
     <option value="Employee">Employee</option>
-    <option value="HR">HR</option>
-    <option value="Mentor">Mentor</option>
-    <option value="Lead">Lead</option>
+    
   </select>
   <br><br>
 <input type="hidden" name="name" value=<%=username%>><br>

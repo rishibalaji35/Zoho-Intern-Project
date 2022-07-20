@@ -11,7 +11,7 @@
 
 
 	<div class="center">
-		<h1>Create a Project</h1>
+		<h1>View a Project</h1>
 		<form action = "viewproject.jsp" method="post">
 		<div class="inputbox">
 				<input type="text" required="required" name = projectname placeholder="ProjectName"> 

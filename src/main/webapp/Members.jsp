@@ -41,7 +41,7 @@ ResultSet resultSet = null;
 <td><b>UserName</b></td>
 <td><b>Work status</b></td>
 <td><b>Approval Status</b></td>
-<td><b>Click To Add</b></td>
+<td><b>Update Role</b></td>
 
 </tr>
 <%
@@ -77,9 +77,10 @@ while(resultSet.next()){
 		<td><%=username%></td>
 		<td><%=resultSet.getString("status")%></td>
 		
-		<%if(status.equals("SuperAdmin")){
-			
-			continue;
+		<%if(status.equals("SuperAdmin")){%>
+			<td></td>
+			<td></td>
+			<% continue;
 		} %>
 		
 		
@@ -92,7 +93,7 @@ while(resultSet.next()){
 		
 		<td><form action="Included.jsp">
 				<input type="hidden" name="name" value=<%=username%>><input
-					type="submit" value="Assign Role">
+					type="submit" value="Update Role">
 			</form></td>
 	</tr>
 
@@ -113,6 +114,12 @@ finally
 %>
 </table>
 <center>
+
+<form action = "viewproject1.jsp" method = "post">
+<input type="hidden" name="projectid" value=projectid>
+<input type = "submit" value = "View Project">
+</form>
+<br>
 <form action="Logout" method="post">
 <input type="submit" value="Logout">
 </form>

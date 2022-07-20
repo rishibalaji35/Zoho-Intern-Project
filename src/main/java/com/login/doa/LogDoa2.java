@@ -62,7 +62,7 @@ public class LogDoa2 {
 	}
 	
 	
-	public boolean issthere(String orgname,String managerid,String username,String password) {
+	public boolean issthere(String orgname,String username,String password) {
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	    StringBuilder sb = new StringBuilder();
 	    Random random = new Random();
@@ -76,7 +76,7 @@ public class LogDoa2 {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(url,uname,pass);
-			String sql7 = "select * from member where username = '"+username+"' and Approval = 'Approved'";
+			String sql7 = "select * from member where username = '"+username+"' and Approval = 'Approved' and status='Employee'";
 			PreparedStatement ps = conn.prepareStatement(sql7);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {

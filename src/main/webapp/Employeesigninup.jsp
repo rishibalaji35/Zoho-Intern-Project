@@ -34,10 +34,10 @@
 		<input type = submit value = "Sign in">
 		</form>
 		
-		<form action="joinprojectee.jsp" method = "post">
+		<!--<form action="joinprojectee.jsp" method = "post">
 		<p>Join existing project</p>
 		<input type = submit value = "Sign in">
-		</form>
+		</form>  -->
 		</div>
 </body>
 </html>

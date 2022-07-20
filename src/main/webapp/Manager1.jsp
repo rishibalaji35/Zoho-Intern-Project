@@ -67,7 +67,7 @@ String sql ="SELECT * FROM member order by status desc";
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
-	//int index = resultSet.getInt(1);
+	
 %>
 	<tr bgcolor="#DEB887">
 		<%
@@ -85,7 +85,7 @@ while(resultSet.next()){
 		
 		<td><%=username%></td>
 		<td><%=resultSet.getString("status")%></td>
-		<td><form action="status" method = "post">
+		<td><form action="status1" method = "post">
 				<input type="hidden" name="name" value=<%=username%>><input
 					type="submit" value=<%=approval%>>
 			</form></td>
@@ -105,7 +105,10 @@ while(resultSet.next()){
 					type="submit" value="Remove">
 			</form></td>
 		
-	<%} %>
+	<%} else{%>
+		<td></td>
+	<% }%>
+		
 			
 			<!-- Remove the selected entry -->
 			
@@ -134,7 +137,7 @@ finally
 <input type = "submit" value = "Create Project">
 </form>
 <br>
-<form action = "viewproject1.jsp" method = "post">
+<form action = "viewproject2.jsp" method = "post">
 <input type="hidden" name="projectid" value=projectid>
 <input type = "submit" value = "View Project">
 </form>

@@ -61,7 +61,7 @@ public class delete1 extends HttpServlet {
 			//statement.executeUpdate(sql1);
 			connection.close();
 			statement.close();
-			response.sendRedirect("Manager.jsp");
+			response.sendRedirect("Manager1.jsp");
 
 			} catch (Exception e) {
 			e.printStackTrace();

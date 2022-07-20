@@ -35,10 +35,10 @@
 		</form>
 		</div>
 		
-		<form action="joinproject.jsp" method = "post">
+		<!-- <form action="joinproject.jsp" method = "post">
 		<p>Join existing project</p>
 		<input type = submit value = "Sign in">
-		</form>
+		</form> -->
 		</div>
 </body>
 </html>

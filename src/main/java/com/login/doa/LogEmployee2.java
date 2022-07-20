@@ -32,10 +32,10 @@ public class LogEmployee2 extends HttpServlet {
 		String password = request.getParameter("pass");
 		
 		String orgname = request.getParameter("orgname");
-		String employeeid = request.getParameter("employeeID");
+		//String employeeid = request.getParameter("employeeID");
 		
 		LogDoa2 doa = new LogDoa2();
-		if (doa.issthere(orgname, employeeid,username,password)) {
+		if (doa.issthere(orgname,username,password)) {
 			response.sendRedirect("home.jsp");
 		}
 

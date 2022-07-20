@@ -259,4 +259,24 @@
     <servlet-name>role1</servlet-name>
     <url-pattern>/role1</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>status1</display-name>
+    <servlet-name>status1</servlet-name>
+    <servlet-class>status1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>status1</servlet-name>
+    <url-pattern>/status1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Nowsms</display-name>
+    <servlet-name>Nowsms</servlet-name>
+    <servlet-class>Nowsms</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Nowsms</servlet-name>
+    <url-pattern>/Nowsms</url-pattern>
+  </servlet-mapping>
 </web-app>

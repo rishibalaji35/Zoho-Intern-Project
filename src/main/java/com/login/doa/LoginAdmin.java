@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import redis.clients.jedis.Jedis;
 
 import java.io.IOException;
 
@@ -27,6 +28,10 @@ public class LoginAdmin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+//		Jedis jedis = new Jedis("localhost",6379);
+//		System.out.println("Connection suces");
+//		System.out.println(jedis.get("a"));
 		// TODO Auto-generated method stub
 		String username = request.getParameter("name");
 		String pass = request.getParameter("pass");
