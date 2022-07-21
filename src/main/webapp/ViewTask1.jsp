@@ -42,7 +42,7 @@ ResultSet resultSet = null;
 <td><b>Assigned By</b></td>
   <td><b>Assigned For</b></td>
   <td><b>Deadline</b></td>  
- <!-- <td><b>Click To Remove</b></td> -->
+  <td><b>Completion Status</b></td>
 
 </tr>
 <%
@@ -61,7 +61,7 @@ while(resultSet.next()){
 		<%
 		String taskname = resultSet.getString("taskname");
 		
-		//String status = resultSet.getString("status");
+		String completionstatus = resultSet.getString("completionstatus");
 		
 		//String approval = resultSet.getString("Approval");
 		
@@ -72,7 +72,10 @@ while(resultSet.next()){
 		<td><%=resultSet.getString("assignedby")%></td>
 		<td><%=resultSet.getString("assignedfor")%></td>
 		<td><%=resultSet.getString("Deadline")%></td>
-		
+		<td><form action = "completionstatus1" method="post">
+					<input type=submit value=<%=completionstatus%>>
+					<input type = "hidden" value =<%=taskname%> name=taskname>
+				</form></td>
 		
 		
 	</tr>

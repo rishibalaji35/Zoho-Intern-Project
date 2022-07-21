@@ -279,4 +279,24 @@
     <servlet-name>Nowsms</servlet-name>
     <url-pattern>/Nowsms</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>completionstatus</display-name>
+    <servlet-name>completionstatus</servlet-name>
+    <servlet-class>completionstatus</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>completionstatus</servlet-name>
+    <url-pattern>/completionstatus</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>completionstatus1</display-name>
+    <servlet-name>completionstatus1</servlet-name>
+    <servlet-class>completionstatus1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>completionstatus1</servlet-name>
+    <url-pattern>/completionstatus1</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -31,7 +31,7 @@ public class LoginAdmin extends HttpServlet {
 		
 //		Jedis jedis = new Jedis("localhost",6379);
 //		System.out.println("Connection suces");
-//		System.out.println(jedis.get("a"));
+//		System.out.println(jedis.get("b"));
 		// TODO Auto-generated method stub
 		String username = request.getParameter("name");
 		String pass = request.getParameter("pass");

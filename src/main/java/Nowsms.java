@@ -12,8 +12,8 @@ import java.io.IOException;
 
 @webServlet("./Nowsms")
 public class Nowsms extends HttpServlet {
-	public static final String ACCOUNT_SID = "";
-    public static final String AUTH_TOKEN = "";
+	public static final String ACCOUNT_SID = "ACe9a4fc12727e4539c7a8e8242c60a701";
+    public static final String AUTH_TOKEN = "f95569d71518dbe77c48bb08ac29161e";
 	private static final long serialVersionUID = 1L;
        
     
@@ -24,7 +24,7 @@ public class Nowsms extends HttpServlet {
 	        Message message = Message.creator(
 	                new com.twilio.type.PhoneNumber("+919344497108"),
 	                new com.twilio.type.PhoneNumber("+18456686335"),
-	                "Project is Over")
+	                "Project has been Ended by the Manager")
 	            .create();
 
 	        System.out.println(message.getSid());

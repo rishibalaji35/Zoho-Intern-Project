@@ -14,7 +14,7 @@
 	<div class="center">
 	<form action  = "loginad" method="post">
 	<div class="inputbox">
-	<!-- <p><h1>Create Own Business</h1></p> -->
+
 	<div class = "inputbox">
 	<input type="submit" value="Create your own Business">
 	</div>

@@ -1,4 +1,5 @@
 import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import redis.clients.jedis.Jedis;
 /**
  * Servlet implementation class status
  */
@@ -51,6 +53,12 @@ public class createproject extends HttpServlet {
 
 			String sql ="insert into project(projectname,description,Deadline) values(?,?,?)";
 			
+			//Redis Implementation
+//			Jedis jedis = new Jedis("localhost",6379);
+//			
+//			jedis.set("projectname", projectname);
+//			jedis.set("description", description);
+//			jedis.set("deadline", deadline);
 			
 			statement=connection.prepareStatement(sql);
 			statement.setString(1, projectname);

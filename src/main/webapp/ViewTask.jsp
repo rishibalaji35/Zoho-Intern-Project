@@ -24,7 +24,7 @@ ResultSet resultSet = null;
 %>
 <html>
 <head>
-<!--  -->
+
 <link rel="stylesheet" href="Members.css">
 <head>
 <title>View Members</title>
@@ -43,6 +43,7 @@ ResultSet resultSet = null;
   <td><b>Assigned For</b></td>
  <td><b>Project Name</b></td>  
  <td><b>DeadLine</b></td>
+ <td><b>Completion Status</b></td>
 
 </tr>
 <%
@@ -61,7 +62,7 @@ while(resultSet.next()){
 		<%
 		String taskname = resultSet.getString("taskname");
 		
-		//String status = resultSet.getString("status");
+		String completionstatus = resultSet.getString("completionstatus");
 		
 		//String approval = resultSet.getString("Approval");
 		
@@ -73,8 +74,12 @@ while(resultSet.next()){
 		<td><%=resultSet.getString("assignedfor")%></td>
 		<td><%=resultSet.getString("projectname")%></td>
 		<td><%=resultSet.getString("Deadline")%></td>
-		
-	</tr>
+			<td><form action = "completionstatus" method="post">
+					<input type=submit value=<%=completionstatus%>>
+					<input type = "hidden" value =<%=taskname%> name=taskname>
+				</form></td>
+
+		</tr>
 
 	<% 
 	

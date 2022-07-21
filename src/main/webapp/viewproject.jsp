@@ -2,9 +2,9 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
+<%@page import ="redis.clients.jedis.Jedis" %>
 
 <%
-
 
 
 String driverName = "com.mysql.jdbc.Driver";
@@ -42,7 +42,7 @@ ResultSet resultSet = null;
 <td><b>Description</b></td>
 <!--<td> <b>Approval Status</b></td> -->
 <td><b>DeadLine</b></td> 
-<!-- <td><b>Click To Remove</b></td> -->
+<td><b>Completion Status(%)</b></td>
 
 
 </tr>
@@ -60,6 +60,10 @@ statement=connection.createStatement();
 
 
 String sql ="SELECT * FROM project WHERE projectname = '"+projectname+"'";
+//Jedis jedis = new Jedis("localhost",6379);
+//System.out.println(jedis.get("projectname"));
+//System.out.println(jedis.get("description"));
+//System.out.println(jedis.get("deadline"));
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
@@ -67,11 +71,11 @@ while(resultSet.next()){
 %>
 	<tr bgcolor="#DEB887">
 		<%
-		String name = resultSet.getString("projectname");
+		String name = resultSet.getString("projectname");//jedis.get("projectname");//
 		
-		String description = resultSet.getString("description");
+		String description = resultSet.getString("description");//jedis.get("description");
 		
-		String deadline = resultSet.getString("Deadline");
+		String deadline = resultSet.getString("Deadline");//jedis.get("deadline");
 	%>
 		
 		
@@ -79,9 +83,28 @@ while(resultSet.next()){
 		
 		<td><%=description%></td>
 		
-		<td><%=deadline%></td>		
+		<td><%=deadline%></td>
+		
+		<%
+		double percentage = 0;
+		String myStatement = "select count(*) as total from task";
+        resultSet = statement.executeQuery(myStatement);
+         double total_count = 0;
+        while(resultSet.next()){
+            total_count = (resultSet.getInt(1));
+            String myStatement1 = "select count(*) as total from task where completionstatus='Completed'";
+            resultSet = statement.executeQuery(myStatement1);
+            double completed_count = 0;
+            while(resultSet.next()){
+                completed_count = (resultSet.getInt(1));
+               double math = completed_count / total_count;
+               percentage = Math.floor(math * 100);
+            }
+        }
+		%>		
+		<td><%=percentage%><progress id="file" value =<%=percentage%> max="100"><%=percentage%></progress></td>
 	<% 
-	
+	//&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 
 }
 connection.close();

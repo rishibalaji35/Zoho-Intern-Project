@@ -115,7 +115,7 @@ finally
 </table>
 <center>
 
-<form action = "viewproject1.jsp" method = "post">
+<form action = "viewproject2.jsp" method = "post">
 <input type="hidden" name="projectid" value=projectid>
 <input type = "submit" value = "View Project">
 </form>

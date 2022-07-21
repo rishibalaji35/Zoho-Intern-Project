@@ -78,7 +78,7 @@ public class Logman extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			String project=request.getParameter("data");
-			session.setAttribute("data",projectid);
+			session.setAttribute("data",name);
 //			String username=request.getParameter("name");
 //			session.setAttribute("name",name);
 			

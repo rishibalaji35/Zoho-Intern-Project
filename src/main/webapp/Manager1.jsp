@@ -29,15 +29,114 @@ ResultSet resultSet = null;
 <head>
 <title>View Members</title>
 <body>
-
-
 <h2 align="center"><font><strong>Logged in as a Manager</strong></font></h2>
-<table align="center" cellpadding="5" cellspacing="5" border="1">
+
+
+
+
+<!-- <center>
+<div>
+<button onclick="show_hide()">Show Info</button>
+</div>
+<center>
+<script src = "showhideelement.js"></script>
+<br><br>-->
+
+
+<table id = "table1" align="center" cellpadding="5" cellspacing="5" border="1">
+<center>
+<div>
+<button onclick="show_hide()">Show Info</button>
+</div>
+<center>
+<script src = "showhideelement.js"></script>
+<br><br>
+<tr bgcolor="#A52A2A">
+
+<td><b>UserName</b></td>
+<td><b>Work status</b></td>
+<td><b>Approval</b></td>
+ <td><b>Organization Name</b></td>
+
+</tr>
+<%
+try{ 
+connection = DriverManager.getConnection(connectionUrl+dbName, userId, password);
+statement=connection.createStatement();
+HttpSession session1 = request.getSession();
+String name = (String)session1.getAttribute("data");
+
+String sql1 ="SELECT * FROM member where username = '"+name+"'";
+
+resultSet = statement.executeQuery(sql1);
+while(resultSet.next()){
+	
+%>
+	<tr bgcolor="#DEB887">
+		<%
+		String username = resultSet.getString("username");
+		
+		String status = resultSet.getString("status");
+		
+		String approval = resultSet.getString("Approval");
+		
+		String orgname = resultSet.getString("Orgname");
+		
+		%>
+		<td><%=username%></td>
+		
+		<td><%=status%></td>
+		
+		<td><%=approval %></td>
+		
+		<td><%=orgname%></td>
+			
+	</tr>
+
+	<% 
+	
+
+}
+connection.close();
+statement.close();
+
+} catch (Exception e) {
+e.printStackTrace();
+}
+finally
+{
+    System.out.println("finally block executed");
+}
+%>
+</table>
+
+<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table id ="table2" align="center" cellpadding="5" cellspacing="5" border="1">
+<center>
+<div>
+<button onclick="show_hide1()">View Members</button>
+</div>
+<center>
+<script src = "showhideelement.js"></script>
+<br><br>
 <tr>
 
 </tr>
 <tr bgcolor="#A52A2A">
->
+
 <td><b>UserName</b></td>
 <td><b>Work status</b></td>
 <td><b>Approval</b></td>
@@ -149,6 +248,26 @@ finally
 
 <center>
 
+
+
+<script>
+function show_hide(){
+	 var a = document.getElementById("table1").style;
+	if(a.display == "none")
+		a.display = "table";
+	else
+		a.display = "none";
+}
+</script>
+<script>
+function show_hide1(){
+	 var a = document.getElementById("table2").style;
+	if(a.display == "none")
+		a.display = "table";
+	else
+		a.display = "none";
+}
+</script>
 </body>
 </html>
 

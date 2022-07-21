@@ -50,7 +50,7 @@ public class LeadTask extends HttpServlet {
 			String Deadline = request.getParameter("Deadline");
 			String projectname = request.getParameter("projectname");
 
-			String sql ="insert into task(taskname,assignedby,assignedfor,Deadline,projectname) values(?,?,?,?,?)";
+			String sql ="insert into task(taskname,assignedby,assignedfor,Deadline,projectname,completionstatus) values(?,?,?,?,?,?)";
 			
 			
 			statement=connection.prepareStatement(sql);
@@ -59,6 +59,7 @@ public class LeadTask extends HttpServlet {
 			statement.setString(3, assignedfor);
 			statement.setString(4, Deadline);
 			statement.setString(5, projectname);
+			statement.setString(6, "Pending");
 			statement.executeUpdate();
 			
 			response.sendRedirect("TeamLeadTask.jsp");
